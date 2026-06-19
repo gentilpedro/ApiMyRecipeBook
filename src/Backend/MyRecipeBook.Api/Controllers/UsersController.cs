@@ -19,8 +19,7 @@ namespace MyRecipeBook.Api.Controllers
         [HttpPost("register")]
         public IActionResult Register(
             [FromBody] RequestRegisterUserAccountJson request, 
-            [FromServices] IRegisterUserAccountUseCase user
-            )
+            [FromServices] IRegisterUserAccountUseCase user)
         {
             user.Execute(request);
 

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using MyRecipeBook.Api.Filters;
+using MyRecipeBook.Application;
+using MyRecipeBook.Infrastructure;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,21 +11,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
-    
-MyRecipeBook.Application.DependencyInjectionExtension.AddApplication(builder.Services);
-MyRecipeBook.Infrastructure.DependencyInjectionExtension.AddInfrastructure(builder.Services);
+builder.Services.AddApplication(); // Extension method for adding application services
+builder.Services.AddInfrastructure(); // Extension method for adding infrastructure services
+
+
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var supportedCultures = new List<CultureInfo> { new CultureInfo("en"), new CultureInfo("pt-BR"), new CultureInfo("es") };
     options.DefaultRequestCulture = new RequestCulture("en");
-    
+
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
 
     options.RequestCultureProviders =
     [
-        new AcceptLanguageHeaderRequestCultureProvider() 
+        new AcceptLanguageHeaderRequestCultureProvider()
     ];
 
 

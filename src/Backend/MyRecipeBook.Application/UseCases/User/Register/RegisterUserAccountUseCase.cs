@@ -2,6 +2,7 @@ using MyRecipeBook.Communication.Requests;
 using Mapster;
 using MyRecipeBook.Exception;
 using MyRecipeBook.Domain.Security.PasswordHashing;
+using MyRecipeBook.Domain.Extensions;
 
 namespace MyRecipeBook.Application.UseCases.User.Register
 {
@@ -14,10 +15,15 @@ namespace MyRecipeBook.Application.UseCases.User.Register
         }
         public void Execute(RequestRegisterUserAccountJson request)
         {
+            if (request.Email.IsNotEmpty())
+            {
+                request.Email.Trim();
+            }
+
             ValidateAndThrowOnFailures(request);
 
             var user = request.Adapt<Domain.Entities.User>();
-            
+
             user.Password = _passwordHasher.HashPassword(request.Password);
 
         }
