@@ -6,7 +6,7 @@ Uma API robusta e estruturada desenvolvida em **.NET 10**, seguindo os princípi
 
 A solução está dividida em múltiplos projetos especializados, respeitando as diretrizes do DDD e isolando as regras de negócio das preocupações de infraestrutura e comunicação externa.
 
-```text
+```bash
 ApiMyRecipeBook/
 ├── src/
 │   ├── ApiMyRecipeBook.API/           # Porta de entrada da aplicação (Controllers)
@@ -17,7 +17,6 @@ ApiMyRecipeBook/
 │   ├── ApiMyRecipeBook.Exception/     # Gestão centralizada de erros e exceções
 │   └── ApiMyRecipeBook.Communication/ # Contratos de Request e Response (DTOs)
 └── README.md
-
 ```
 
 ---
@@ -95,25 +94,16 @@ ApiMyRecipeBook/
 ```bash
 git clone [https://github.com/gentilpedro/ApiMyRecipeBook.git](https://github.com/gentilpedro/ApiMyRecipeBook.git)
 cd ApiMyRecipeBook
-
 ```
 
 
 2. **Restaurar as dependências:**
 ```bash
 dotnet restore
-
 ```
 
 
 3. **Executar a API:**
 ```bash
 dotnet run --project src/ApiMyRecipeBook.API
-
-```
-
-
-
-```
-
 ```
