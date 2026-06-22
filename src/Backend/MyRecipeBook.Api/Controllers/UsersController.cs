@@ -9,12 +9,12 @@ namespace MyRecipeBook.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        [HttpPost/*("register")*/]
-        public IActionResult Register(
+        [HttpPost]
+        public async Task<IActionResult> Register(
             [FromBody] RequestRegisterUserAccountJson request, 
             [FromServices] IRegisterUserAccountUseCase user)
         {
-            user.Execute(request);
+            await user.Execute(request);
 
             return Ok();
         }
