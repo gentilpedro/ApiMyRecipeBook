@@ -15,11 +15,6 @@ namespace MyRecipeBook.Application.UseCases.User.Register
         }
         public void Execute(RequestRegisterUserAccountJson request)
         {
-            if (request.Email.IsNotEmpty())
-            {
-                request.Email.Trim();
-            }
-
             ValidateAndThrowOnFailures(request);
 
             var user = request.Adapt<Domain.Entities.User>();

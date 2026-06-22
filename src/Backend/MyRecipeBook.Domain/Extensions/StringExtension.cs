@@ -1,9 +1,15 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace MyRecipeBook.Domain.Extensions;
 
 public static class StringExtension
 {
-    public static bool IsNotEmpty(this string? value)
+        public static bool IsEmpty([NotNullWhen(false)]this string? value)
     {
-        return string.IsNullOrWhiteSpace(value) == false;
+        return string.IsNullOrWhiteSpace(value);
+    }
+    public static bool IsNotEmpty([NotNullWhen(true)]this string? value)
+    {
+        return !string.IsNullOrWhiteSpace(value);
     }
 }
