@@ -3,11 +3,15 @@ using MyRecipeBook.Domain.Security.PasswordHashing;
 using MyRecipeBook.Infrastructure.Security.PasswordHashing;
 namespace MyRecipeBook.Infrastructure;
 
-public class DependencyInjectionExtension
+public static class DependencyInjectionExtension
 {
-    public static void AddInfrastructure(IServiceCollection services)
-    { 
-        services.AddScoped<IPasswordHasher, Argon2PasswordHasher>();
+    extension(IServiceCollection services)
+    {
+        public void AddInfrastructure()
+        { 
+            services.AddScoped<IPasswordHasher, Argon2PasswordHasher>();
         
+        }
     }
+
 }
