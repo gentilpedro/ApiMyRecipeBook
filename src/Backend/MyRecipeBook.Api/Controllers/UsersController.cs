@@ -5,25 +5,18 @@ using MyRecipeBook.Communication.Requests;
 
 namespace MyRecipeBook.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IRegisterUserAccountUseCase _registerUserAccountUseCase;
-
-        public UsersController(IRegisterUserAccountUseCase registerUserAccountUseCase)
-        {
-            _registerUserAccountUseCase = registerUserAccountUseCase;
-        }
-
-        [HttpPost("register")]
+        [HttpPost/*("register")*/]
         public IActionResult Register(
             [FromBody] RequestRegisterUserAccountJson request, 
             [FromServices] IRegisterUserAccountUseCase user)
         {
             user.Execute(request);
 
-            return Created();
+            return Ok();
         }
     }
 }
