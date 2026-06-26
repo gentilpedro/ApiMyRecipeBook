@@ -4,6 +4,7 @@ using MyRecipeBook.Exception;
 using MyRecipeBook.Domain.Security.PasswordHashing;
 using MyRecipeBook.Domain.Extensions;
 using MyRecipeBook.Domain.Repository.User;
+using MyrecipeBook.Domain.Repository;
 
 namespace MyRecipeBook.Application.UseCases.User.Register
 {
@@ -11,12 +12,19 @@ namespace MyRecipeBook.Application.UseCases.User.Register
     {
         private readonly IPasswordHasher _passwordHasher;
         private readonly IUserWriteOnlyRepository _userWriteOnlyRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterUserAccountUseCase(IPasswordHasher passwordHasher, IUserWriteOnlyRepository userWriteOnlyRepository)
+        public RegisterUserAccountUseCase(
+            IPasswordHasher passwordHasher, 
+            IUserWriteOnlyRepository userWriteOnlyRepository,
+            IUnitOfWork unitOfWork)
         {
             _passwordHasher = passwordHasher;
             _userWriteOnlyRepository = userWriteOnlyRepository;
+            _unitOfWork = unitOfWork;
+            
         }
+
 
         public async Task Execute(RequestRegisterUserAccountJson request)
         {
@@ -25,6 +33,7 @@ namespace MyRecipeBook.Application.UseCases.User.Register
             user.Password = _passwordHasher.HashPassword(request.Password);
 
             await _userWriteOnlyRepository.Add(user);
+            await _unitOfWork.Commit();
 
         }
 
