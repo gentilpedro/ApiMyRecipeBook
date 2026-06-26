@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyrecipeBook.Domain.Repository;
 using MyRecipeBook.Domain.Repository.User;
 using MyRecipeBook.Domain.Security.PasswordHashing;
 using MyRecipeBook.Infrastructure.DataAcess;
@@ -16,6 +17,7 @@ public static class DependencyInjectionExtension
         { 
             services.AddScoped<IPasswordHasher, Argon2PasswordHasher>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             // services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddDbContext<MyRecipeBookDbContext>(config =>
             {
