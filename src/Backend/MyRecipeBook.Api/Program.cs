@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConverter()));
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplication(); // Extension method for adding application services
-builder.Services.AddInfrastructure(); // Extension method for adding infrastructure services
+builder.Services.AddInfrastructure(builder.Configuration); // Extension method for adding infrastructure services
 
 
 
