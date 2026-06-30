@@ -5,6 +5,7 @@ using MyRecipeBook.Domain.Security.PasswordHashing;
 using MyRecipeBook.Domain.Extensions;
 using MyRecipeBook.Domain.Repository.User;
 using MyrecipeBook.Domain.Repository;
+using MyRecipeBook.Communication.Responses;
 
 namespace MyRecipeBook.Application.UseCases.User.Register
 {
@@ -26,7 +27,7 @@ namespace MyRecipeBook.Application.UseCases.User.Register
         }
 
 
-        public async Task Execute(RequestRegisterUserAccountJson request)
+        public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserAccountJson request)
         {
             ValidateAndThrowOnFailures(request);
             var user = request.Adapt<Domain.Entities.User>();
@@ -34,6 +35,12 @@ namespace MyRecipeBook.Application.UseCases.User.Register
 
             await _userWriteOnlyRepository.Add(user);
             await _unitOfWork.Commit();
+
+            return new ResponseRegisteredUserJson
+            {
+                Name = user.Name,
+                Tokens = new ResponseTokensJson()
+            };
 
         }
 
