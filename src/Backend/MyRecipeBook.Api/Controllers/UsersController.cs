@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Communication.Requests;
+using MyRecipeBook.Communication.Responses;
 
 namespace MyRecipeBook.Api.Controllers
 {
@@ -10,13 +10,16 @@ namespace MyRecipeBook.Api.Controllers
     public class UsersController : ControllerBase
     {
         [HttpPost]
+        [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+
         public async Task<IActionResult> Register(
             [FromBody] RequestRegisterUserAccountJson request, 
             [FromServices] IRegisterUserAccountUseCase user)
         {
-            await user.Execute(request);
+            var result = await user.Execute(request);
 
-            return Ok();
+            return Created(string.Empty, result);
         }
     }
 }
