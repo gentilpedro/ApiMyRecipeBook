@@ -23,7 +23,6 @@ namespace MyRecipeBook.Exception {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ResourceMessagesException {
-        
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
@@ -63,6 +62,14 @@ namespace MyRecipeBook.Exception {
         /// <summary>
         ///   Looks up a localized string similar to Unknown error!.
         /// </summary>
+        /// 
+        /// 
+        /// 
+        public static string VALIDATION_EMAIL_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("VALIDATION_EMAIL_ALREADY_EXISTS", resourceCulture);
+            }
+        }
         public static string UNKNOWN {
             get {
                 return ResourceManager.GetString("UNKNOWN", resourceCulture);
